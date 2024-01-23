@@ -1,6 +1,7 @@
 // lab 3
 // Kittipich Aiumbhornsin
 // 6488004
+// based from https://www.freecodecamp.org/news/an-introduction-to-flutter-the-basics-9fe541fd39e2/
 
 import 'package:flutter/widgets.dart';
 
