@@ -1,0 +1,67 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'login',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: MyHomePage(title: 'login'),
+    );
+  }
+}
+
+class MyHomePage extends StatelessWidget {
+  MyHomePage({super.key, required this.title});
+  final String title;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: () {},
+            ),
+            centerTitle: true,
+            title: Text("Setting")),
+        body: ListView(
+            shrinkWrap: true,
+            padding: const EdgeInsets.fromLTRB(2.0, 10.0, 2.0, 10.0),
+            children: <Widget>[
+              settingBox(name: "Account"),
+              settingBox(name: "Language"),
+              settingBox(name: "Notification"),
+              settingBox(name: "Map Style"),
+              settingBox(name: "Backup and Sync"),
+              settingBox(name: "Feedback and Report"),
+            ]));
+  }
+}
+
+class settingBox extends StatelessWidget {
+  settingBox({super.key, required this.name});
+  final String name;
+
+  Widget build(BuildContext context) {
+    return Container(
+        padding: EdgeInsets.all(2),
+        height: 120,
+        child: Card(
+            color: Color.fromARGB(217, 189, 189, 189),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Text(this.name, style: TextStyle(fontWeight: FontWeight.bold)),
+              ],
+            )));
+  }
+}
