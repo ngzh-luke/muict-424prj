@@ -1,6 +1,5 @@
 // Kittipich Aiumbhornsin
-// Section 3 #6488004
-import 'package:flutter/material.dart';
+// Section 3 #6488004import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -27,8 +26,8 @@ class _HomePageState extends State<HomePage> {
 // open Homepage
                   Navigator.pushNamed(context, '/about');
                 },
-                child:
-                    const Text('About', style: TextStyle(color: Colors.blue)),
+                child: const Text('Go to About page',
+                    style: TextStyle(color: Colors.blue)),
               )),
               const Spacer()
             ],
