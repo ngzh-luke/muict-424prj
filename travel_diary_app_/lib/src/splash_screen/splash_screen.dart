@@ -6,6 +6,7 @@ import '../sample_feature/sample_item_list_view.dart';
 import '../settings/settings_controller.dart';
 import '../settings/settings_view.dart';
 
+import '../authentication/login_view.dart';
 class SplashScreen extends StatefulWidget {
   const SplashScreen({
     super.key});
@@ -28,7 +29,8 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
 
     Future.delayed(const Duration(seconds: 2), () {
       Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (_) => const SampleItemListView(), // Default view
+        // builder: (_) => const SampleItemListView(), // Default view
+        builder: (_) => const LoginView(), // Default view
       ));
     });
   }
