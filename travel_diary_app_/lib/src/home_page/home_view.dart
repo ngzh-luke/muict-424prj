@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'destination_view.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -108,26 +109,43 @@ class DestinationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 200, // Adjust the width to fit the card
-      child: Card(
-        clipBehavior: Clip.antiAlias,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: Column(
-          children: [
-            Image.network(imageUrl, fit: BoxFit.cover, height: 140,), // Adjust the height to fit the image
-            ListTile(
-              title: Text(title),
-              subtitle: Text('$location · $date'),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DestinationDetailsView(
+              title: title,
+              location: location,
+              date: date,
+              imageUrl: imageUrl,
+              description: 'Replace with your description', // Pass the description to the details page
             ),
-          ],
+          ),
+        );
+      },
+      child: Container(
+        width: 200, // Adjust the width to fit the card
+        child: Card(
+          clipBehavior: Clip.antiAlias,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Column(
+            children: [
+              Image.network(imageUrl, fit: BoxFit.cover, height: 140,), // Adjust the height to fit the image
+              ListTile(
+                title: Text(title),
+                subtitle: Text('$location · $date'),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
+
 
 // Assuming you have a list of destinations like this
 final List<Destination> destinations = [
