@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:travel_diary_app_/src/home_page/map_view.dart';
 
 class DestinationDetailsView extends StatelessWidget {
   final String title;
@@ -6,6 +7,8 @@ class DestinationDetailsView extends StatelessWidget {
   final String description;
   final String imageUrl;
   final String date; // Assuming you might want to use the date somewhere
+  final double latitude;
+  final double longitude;
 
   const DestinationDetailsView({
     Key? key,
@@ -14,6 +17,8 @@ class DestinationDetailsView extends StatelessWidget {
     required this.description,
     required this.imageUrl,
     required this.date,
+    required this.latitude,
+    required this.longitude,
   }) : super(key: key);
 
   @override
@@ -92,6 +97,19 @@ class DestinationDetailsView extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {
                       // Handle see maps tap
+                      // Router to map view with send latlng
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MapScreen(
+                            title: title,
+                            latitude: latitude,
+                            longitude: longitude,
+                          ),
+                        ),
+                      );
+
+
                     },
                     child: Text('See maps'),
                     style: ElevatedButton.styleFrom(
