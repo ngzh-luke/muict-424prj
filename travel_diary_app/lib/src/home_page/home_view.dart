@@ -1,10 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:travel_diary_app_/src/home_page/add_destination.dart';
 import 'package:travel_diary_app_/src/home_page/calenda_view.dart';
 import 'destination_view.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({Key? key}) : super(key: key);
+  // const HomeView({Key? key}) : super(key: key);
+  final user = FirebaseAuth.instance.currentUser!;
 
   static const routeName = '/home';
 
@@ -16,13 +18,13 @@ class HomeView extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: CircleAvatar(
             backgroundColor: Colors.indigo[200],
-            child: Icon(Icons.person, color: Colors.white),
+            child: const Icon(Icons.person, color: Colors.white),
           ),
         ),
-        title: Text('Hello, NTP Life'),
+        title: const Text("Travel Diary app by Good Boys Team"),
         actions: [
           IconButton(
-            icon: Icon(Icons.public),
+            icon: const Icon(Icons.public),
             onPressed: () {
               // Handle action (e.g., open a map)
             },
@@ -38,7 +40,7 @@ class HomeView extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Text(
-                'Hello NTP!\nExplore the Beautiful World',
+                'Hello and welcome back, ${user.email}!\nExplore the Beautiful World',
                 style: TextStyle(
                   fontSize: 26,
                   fontWeight: FontWeight.bold,
@@ -69,8 +71,10 @@ class HomeView extends StatelessWidget {
                     date: destination.date,
                     imageUrl: destination.imageUrl,
                     latitude: destination.latitude, // Pass the actual latitude
-                    longitude: destination.longitude, // Pass the actual longitude
-                    description: destination.description, // Pass the actual description
+                    longitude:
+                        destination.longitude, // Pass the actual longitude
+                    description:
+                        destination.description, // Pass the actual description
                   );
                 },
               ),
@@ -102,12 +106,11 @@ class HomeView extends StatelessWidget {
               MaterialPageRoute(
                   builder: (context) => const AddDestinationView()),
             );
-          } else if (index == 2 ) {
+          } else if (index == 2) {
             // Handle calendar tap
             Navigator.push(
               context,
-              MaterialPageRoute(
-                builder: (context) => const CalendarView()),
+              MaterialPageRoute(builder: (context) => const CalendarView()),
             );
           }
         },
@@ -148,7 +151,8 @@ class DestinationCard extends StatelessWidget {
               location: "location",
               description:
                   "This is description", // Pass the actual description to the details view
-              imageUrl: "https://a.cdn-hotels.com/gdcs/production25/d278/9609fe78-1dd2-47bf-b75d-15df7f6feb8f.jpg",
+              imageUrl:
+                  "https://a.cdn-hotels.com/gdcs/production25/d278/9609fe78-1dd2-47bf-b75d-15df7f6feb8f.jpg",
               date: '14/02',
               latitude: 8.041492, // Replace with the actual latitude
               longitude: 98.8369438, // Replace with the actual longitude

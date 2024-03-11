@@ -1,21 +1,40 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-class SignupView extends StatelessWidget {
+class SignupView extends StatefulWidget {
+  // ignore: use_super_parameters
   const SignupView({Key? key}) : super(key: key);
 
   static const routeName = '/signup';
+
+  @override
+  State<SignupView> createState() => _SignupViewState();
+}
+
+class _SignupViewState extends State<SignupView> {
+  final emailContr = TextEditingController();
+  final nameContr = TextEditingController();
+  final passwordContr = TextEditingController();
+
+  @override
+  void dispose() {
+    emailContr.dispose();
+    passwordContr.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       // appBar: AppBar(title: Text('Sign up now')),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               "Sign up now",
               style: TextStyle(
                 fontSize: 24,
@@ -23,14 +42,15 @@ class SignupView extends StatelessWidget {
               ),
               textAlign: TextAlign.center,
             ),
-            Text(
+            const Text(
               'Please fill the details and create account',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 16),
             ),
-            Padding(padding: EdgeInsets.all(16.0)),
-            SizedBox(height: 20),
+            const Padding(padding: EdgeInsets.all(16.0)),
+            const SizedBox(height: 20),
             TextFormField(
+              controller: nameContr,
               decoration: InputDecoration(
                 hintText: 'NTP Life',
                 labelText: 'Full Name',
@@ -42,8 +62,9 @@ class SignupView extends StatelessWidget {
                 fillColor: Colors.grey[200],
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             TextFormField(
+              controller: emailContr,
               decoration: InputDecoration(
                 hintText: 'user@email.com',
                 labelText: 'Email',
@@ -56,12 +77,13 @@ class SignupView extends StatelessWidget {
               ),
               keyboardType: TextInputType.emailAddress,
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             TextFormField(
+              controller: passwordContr,
               decoration: InputDecoration(
                 hintText: '********',
                 labelText: 'Password',
-                suffixIcon: Icon(Icons.visibility_off),
+                suffixIcon: const Icon(Icons.visibility_off),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
                   borderSide: BorderSide.none,
@@ -71,7 +93,7 @@ class SignupView extends StatelessWidget {
               ),
               obscureText: true,
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
@@ -82,28 +104,29 @@ class SignupView extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
                 // Implement your signup logic
+                authSignUp();
               },
-              child: Text(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue,
+                minimumSize: const Size(double.infinity,
+                    50), // double.infinity is the width and 50 is the height
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
+              child: const Text(
                 'Sign Up',
                 style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                     color: Colors.white),
               ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue,
-                minimumSize: Size(double.infinity,
-                    50), // double.infinity is the width and 50 is the height
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-              ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             TextButton(
                 onPressed: () {
                   Navigator.pop(context);
@@ -111,7 +134,7 @@ class SignupView extends StatelessWidget {
                 child:
                     // Text('Already have an account? Sign in'),
                     RichText(
-                  text: TextSpan(
+                  text: const TextSpan(
                     text: 'Already have an account? ',
                     style: TextStyle(color: Colors.black),
                     children: <TextSpan>[
@@ -130,4 +153,6 @@ class SignupView extends StatelessWidget {
       ),
     );
   }
+
+  Future authSignUp() async {}
 }
