@@ -10,12 +10,13 @@ import 'splash_screen/splash_screen.dart';
 
 /// The Widget that configures your application.
 class MyApp extends StatelessWidget {
-  const MyApp({
+  MyApp({
     super.key,
     required this.settingsController,
   });
 
   final SettingsController settingsController;
+  final navigatorKey = GlobalKey<NavigatorState>();
 
   @override
   Widget build(BuildContext context) {
@@ -80,6 +81,7 @@ class MyApp extends StatelessWidget {
               },
             );
           },
+          navigatorKey: navigatorKey,
         );
       },
     );

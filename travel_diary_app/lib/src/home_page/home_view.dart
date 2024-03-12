@@ -1,88 +1,27 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:travel_diary_app_/src/home_page/add_destination.dart';
 import 'package:travel_diary_app_/src/home_page/calenda_view.dart';
+import 'package:travel_diary_app_/src/settings/settings_controller.dart';
+import 'package:travel_diary_app_/src/settings/settings_view.dart';
 import 'destination_view.dart';
 
 class HomeView extends StatelessWidget {
-  // const HomeView({Key? key}) : super(key: key);
+  HomeView({super.key});
   final user = FirebaseAuth.instance.currentUser!;
+
+  static const TextStyle optionStyle =
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
   static const routeName = '/home';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: CircleAvatar(
-            backgroundColor: Colors.indigo[200],
-            child: const Icon(Icons.person, color: Colors.white),
-          ),
-        ),
-        title: const Text("Travel Diary app by Good Boys Team"),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.public),
-            onPressed: () {
-              // Handle action (e.g., open a map)
-            },
-          ),
-        ],
-        backgroundColor: Colors.white,
-        elevation: 0,
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                'Hello and welcome back, ${user.email}!\nExplore the Beautiful World',
-                style: TextStyle(
-                  fontSize: 26,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Text(
-                'Your Destination',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 250, // Adjust the height to fit the card
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: destinations
-                    .length, // Assuming 'destinations' is a list of your destinations
-                itemBuilder: (BuildContext context, int index) {
-                  final destination = destinations[index];
-                  return DestinationCard(
-                    title: destination.title,
-                    location: destination.location,
-                    date: destination.date,
-                    imageUrl: destination.imageUrl,
-                    latitude: destination.latitude, // Pass the actual latitude
-                    longitude:
-                        destination.longitude, // Pass the actual longitude
-                    description:
-                        destination.description, // Pass the actual description
-                  );
-                },
-              ),
-            ),
-            // Other widgets and content would follow
-          ],
-        ),
-      ),
+      drawer: leftDrawer(context),
+      appBar: headBar(),
+      body: body(),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -114,6 +53,158 @@ class HomeView extends StatelessWidget {
             );
           }
         },
+      ),
+    );
+  }
+
+  SingleChildScrollView body() {
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              'Hello and welcome back, ${user.email}!',
+              style: const TextStyle(
+                fontSize: 21,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Text(
+              "Explore the Beautiful World",
+              style: TextStyle(color: Colors.cyan, fontSize: 26),
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              'Your Destination',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 250, // Adjust the height to fit the card
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: destinations
+                  .length, // Assuming 'destinations' is a list of your destinations
+              itemBuilder: (BuildContext context, int index) {
+                final destination = destinations[index];
+                return DestinationCard(
+                  title: destination.title,
+                  location: destination.location,
+                  date: destination.date,
+                  imageUrl: destination.imageUrl,
+                  latitude: destination.latitude, // Pass the actual latitude
+                  longitude: destination.longitude, // Pass the actual longitude
+                  description:
+                      destination.description, // Pass the actual description
+                );
+              },
+            ),
+          ),
+          // Other widgets and content would follow
+        ],
+      ),
+    );
+  }
+
+  AppBar headBar() {
+    return AppBar(
+      leading: Builder(builder: (BuildContext context) {
+        return IconButton(
+          icon: CircleAvatar(
+            backgroundColor: Colors.indigo[200],
+            child: const Icon(
+              Icons.person,
+              color: Colors.white,
+            ),
+          ),
+          // open left drawer after click on profile icon
+          onPressed: () => Scaffold.of(context).openDrawer(),
+        );
+      }),
+      title: const Text("Travel Diary"),
+      actions: [
+        IconButton(
+          icon: const Icon(Icons.public),
+          onPressed: () {
+            // Handle action (e.g., open a map)
+          },
+        ),
+      ],
+      backgroundColor: Colors.orange,
+      elevation: 0,
+    );
+  }
+
+  showSignoutDialog(BuildContext context) {
+    // set up the buttons
+    Widget cancelButton = TextButton(
+      child: const Text("Cancel"),
+      onPressed: () {
+        Navigator.of(context).pop(); // dismiss dialog
+      },
+    );
+    Widget continueButton = TextButton(
+      child: const Text("Continue"),
+      onPressed: () {
+        FirebaseAuth.instance.signOut();
+        Navigator.of(context).pop(); // dismiss dialog
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: const Text("Signout?"),
+      content: const Text("Would you like signout?"),
+      actions: [
+        cancelButton,
+        continueButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
+  Drawer leftDrawer(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        padding: const EdgeInsets.all(1),
+        children: [
+          const DrawerHeader(
+            decoration: BoxDecoration(
+              color: Colors.blue,
+            ),
+            child: Text('Good Boys'),
+          ),
+          ListTile(
+            title: const Text('Home'),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+              title: const Text("Setting"),
+              onTap: () => Navigator.of(context).pushNamed('/settings')),
+          ListTile(
+              textColor: Colors.red,
+              onTap: () => showSignoutDialog(context),
+              title: const Text("Signout")),
+        ],
       ),
     );
   }
