@@ -1,8 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:travel_diary_app_/src/authentication/auth_logic.dart';
-import 'package:travel_diary_app_/src/authentication/authen.dart';
+// import 'package:travel_diary_app_/src/authentication/auth_logic.dart';
+import 'package:travel_diary_app_/src/user_object.dart';
 import 'signup_view.dart';
 import 'forgot_password_view.dart';
 // import '../home_page/home_view.dart';
@@ -21,7 +21,7 @@ class _LoginViewState extends State<LoginView> {
   final emailContr = TextEditingController();
   final nameContr = TextEditingController();
   final passwordContr = TextEditingController();
-  final navigatorKey = GlobalKey<NavigatorState>();
+  // final navigatorKey = GlobalKey<NavigatorState>();
 
   @override
   void dispose() {
@@ -119,7 +119,7 @@ class _LoginViewState extends State<LoginView> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => ForgotPasswordView()),
+                        builder: (context) => const ForgotPasswordView()),
                   );
                   // Implement forgot password functionality
                 },
@@ -128,7 +128,10 @@ class _LoginViewState extends State<LoginView> {
             ),
             const SizedBox(height: 16),
             ElevatedButton(
-              onPressed: authSignIn,
+              onPressed: () => UserObject().authSignIn(
+                  context: context,
+                  email: emailContr.text,
+                  password: passwordContr.text),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue,
                 minimumSize: const Size(double.infinity,
@@ -209,53 +212,5 @@ class _LoginViewState extends State<LoginView> {
         return alert;
       },
     );
-  }
-
-  Future authSignIn() async {
-    // showDialog(
-    //   context: context,
-    //   builder: (context) => const Center(
-    //     child: CircularProgressIndicator(),
-    //   ),
-    //   barrierDismissible: true,
-    //   barrierLabel: 'Loading',
-    // );
-    try {
-      await FirebaseAuth.instance
-          .signInWithEmailAndPassword(
-              email: emailContr.text.trim(),
-              password: passwordContr.text.trim())
-          .then((value) =>
-              // const Center(
-              //       child: CircularProgressIndicator(),
-              //     )
-              showDialog(
-                context: context,
-                builder: (context) => const Center(
-                  child: Column(
-                    children: [
-                      CircularProgressIndicator(),
-                      Text('click anywhere to dismiss')
-                    ],
-                  ),
-                ),
-                barrierDismissible: true,
-                barrierLabel: 'Loading',
-              ))
-          .whenComplete(() => const AuthLogic());
-      // .whenComplete(
-      //     () => Navigator.popAndPushNamed(context, '/auth-logic'));
-      // .whenComplete(() => const Authen());
-    } on FirebaseAuthException catch (e) {
-      showErrorDialog(context, e.message.toString());
-      print(e);
-      // navigatorKey.currentState!.popUntil(ModalRoute.withName('/login'));
-      // navigatorKey.currentState!.popUntil(((route) => false));
-    }
-    // Navigator.of(context)
-    //     .pop([ModalRoute.withName('/login'), ModalRoute.withName('/home')]);
-
-    // navigatorKey.currentState!.popUntil((route) => false); //
-    // navigatorKey.currentState!.popUntil(((route) => route.isFirst));
   }
 }

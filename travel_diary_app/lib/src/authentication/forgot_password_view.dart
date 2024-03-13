@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ForgotPasswordView extends StatelessWidget {
-  const ForgotPasswordView({Key? key}) : super(key: key);
+  const ForgotPasswordView({super.key});
 
   static const routeName = '/forgot-password';
 
@@ -13,7 +13,7 @@ class ForgotPasswordView extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
-          content: Column(
+          content: const Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Icon(
@@ -27,14 +27,18 @@ class ForgotPasswordView extends StatelessWidget {
               ),
               SizedBox(height: 8),
               Text(
-                "We have sent password recovery instructions to your email",
+                "Password reset function is under developing!",
                 textAlign: TextAlign.center,
               ),
+              // Text(
+              //   "We have sent password recovery instructions to your email",
+              //   textAlign: TextAlign.center,
+              // ),
             ],
           ),
           actions: <Widget>[
             TextButton(
-              child: Text('Okay'),
+              child: const Text('Okay'),
               onPressed: () {
                 Navigator.of(context).pop(); // Close the dialog
               },
@@ -56,20 +60,20 @@ class ForgotPasswordView extends StatelessWidget {
         elevation: 0,
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               "Forgot password",
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
               "Enter your email account to reset your password",
               style: TextStyle(
@@ -77,7 +81,7 @@ class ForgotPasswordView extends StatelessWidget {
                 color: Colors.grey[600],
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             TextFormField(
               decoration: InputDecoration(
                 hintText: 'user@email.com',
@@ -87,26 +91,27 @@ class ForgotPasswordView extends StatelessWidget {
               ),
               keyboardType: TextInputType.emailAddress,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             SizedBox(
               width: double.infinity, // match_parent
               child: ElevatedButton(
                 onPressed: () {
                   // Call the reset password dialog
+
                   _showResetPasswordDialog(context);
                 },
-                child: Text(
-                  'Reset Password',
-                  style: TextStyle(fontSize: 16),
-                ),
                 style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white, 
+                  foregroundColor: Colors.white,
                   backgroundColor: Colors.blue,
-                  padding: EdgeInsets.all(16.0),
-                  minimumSize: Size(double.infinity, 50),
+                  padding: const EdgeInsets.all(16.0),
+                  minimumSize: const Size(double.infinity, 50),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
+                ),
+                child: const Text(
+                  'Reset Password',
+                  style: TextStyle(fontSize: 16),
                 ),
               ),
             ),

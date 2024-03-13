@@ -1,7 +1,10 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:developer';
+import 'package:travel_diary_app_/src/authentication/login_view.dart';
+import 'package:travel_diary_app_/src/authentication/signup_view.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:travel_diary_app_/src/authentication/authen.dart';
 import 'package:travel_diary_app_/src/home_page/home_view.dart';
+import 'package:travel_diary_app_/src/user_object.dart';
 
 class AuthLogic extends StatefulWidget {
   const AuthLogic({super.key});
@@ -14,8 +17,9 @@ class AuthLogic extends StatefulWidget {
 class _AuthLogicState extends State<AuthLogic> {
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<User?>(
-        stream: FirebaseAuth.instance.authStateChanges(),
+    return StreamBuilder(
+        // stream: FirebaseAuth.instance.authStateChanges(),
+        stream: UserObject().authStateChanges,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -27,11 +31,36 @@ class _AuthLogicState extends State<AuthLogic> {
             );
           } else if (snapshot.hasData) {
             // if given credentials are all match to auth server, return home page to user
+            log('home view');
             return HomeView();
           } else {
             //  if not login, return login page, else return signup page
+            log('authen');
             return const Authen();
           }
         });
   }
+}
+
+class Authen extends StatefulWidget {
+  const Authen({super.key});
+
+  @override
+  State<Authen> createState() => _AuthenState();
+}
+
+class _AuthenState extends State<Authen> {
+  final navigatorKey = GlobalKey<NavigatorState>();
+  bool isLogin = true;
+  @override
+  Widget build(BuildContext context) => isLogin
+      ? LoginView(
+          onClickLogIn: toggle,
+        )
+      : SignupView(onClickSignUp: toggle);
+
+  void toggle() => setState(() {
+        isLogin = !isLogin;
+        log('islog:${isLogin}');
+      });
 }

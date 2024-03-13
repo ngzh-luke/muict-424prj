@@ -1,15 +1,13 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:travel_diary_app_/src/home_page/add_destination.dart';
 import 'package:travel_diary_app_/src/home_page/calenda_view.dart';
-import 'package:travel_diary_app_/src/settings/settings_controller.dart';
-import 'package:travel_diary_app_/src/settings/settings_view.dart';
+import 'package:travel_diary_app_/src/user_object.dart';
 import 'destination_view.dart';
 
 class HomeView extends StatelessWidget {
   HomeView({super.key});
-  final user = FirebaseAuth.instance.currentUser!;
+  final user = UserObject().currentUser;
 
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
@@ -65,7 +63,7 @@ class HomeView extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(
-              'Hello and welcome back, ${user.email}!',
+              'Hello and welcome back, ${user?.email}!',
               style: const TextStyle(
                 fontSize: 21,
                 fontWeight: FontWeight.bold,
@@ -145,41 +143,6 @@ class HomeView extends StatelessWidget {
     );
   }
 
-  showSignoutDialog(BuildContext context) {
-    // set up the buttons
-    Widget cancelButton = TextButton(
-      child: const Text("Cancel"),
-      onPressed: () {
-        Navigator.of(context).pop(); // dismiss dialog
-      },
-    );
-    Widget continueButton = TextButton(
-      child: const Text("Continue"),
-      onPressed: () {
-        FirebaseAuth.instance.signOut();
-        Navigator.of(context).pop(); // dismiss dialog
-      },
-    );
-
-    // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      title: const Text("Signout?"),
-      content: const Text("Would you like signout?"),
-      actions: [
-        cancelButton,
-        continueButton,
-      ],
-    );
-
-    // show the dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
-  }
-
   Drawer leftDrawer(BuildContext context) {
     return Drawer(
       child: ListView(
@@ -202,7 +165,7 @@ class HomeView extends StatelessWidget {
               onTap: () => Navigator.of(context).pushNamed('/settings')),
           ListTile(
               textColor: Colors.red,
-              onTap: () => showSignoutDialog(context),
+              onTap: () => UserObject().authSignOut(context),
               title: const Text("Signout")),
         ],
       ),

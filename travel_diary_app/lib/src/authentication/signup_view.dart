@@ -1,8 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:travel_diary_app_/src/authentication/auth_logic.dart';
-import 'package:travel_diary_app_/src/authentication/authen.dart';
+// import 'package:travel_diary_app_/src/authentication/auth_logic.dart';
+import 'package:travel_diary_app_/src/user_object.dart';
 
 class SignupView extends StatefulWidget {
   // ignore: use_super_parameters
@@ -18,15 +18,13 @@ class SignupView extends StatefulWidget {
 
 class _SignupViewState extends State<SignupView> {
   // _SignupViewState(nk);
+
   final emailContr = TextEditingController();
   final nameContr = TextEditingController();
   final passwordContr = TextEditingController();
-  final nk = GlobalKey<NavigatorState>();
 
   @override
   void dispose() {
-    emailContr.dispose();
-    passwordContr.dispose();
     super.dispose();
   }
 
@@ -148,7 +146,10 @@ class _SignupViewState extends State<SignupView> {
             ElevatedButton(
               onPressed: () {
                 // Implement your signup logic
-                authSignUp();
+                UserObject().authSignUp(
+                    context: context,
+                    email: emailContr.text,
+                    password: passwordContr.text);
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue,
@@ -196,76 +197,5 @@ class _SignupViewState extends State<SignupView> {
         ),
       ),
     );
-  }
-
-  showErrorDialog(BuildContext context, String errMsg) {
-    // set up the buttons
-    Widget okButton = TextButton(
-      child: const Text("OK"),
-      onPressed: () {
-        Navigator.of(context).pop(); // dismiss dialog
-        Navigator.pushNamed(context, '/signup');
-      },
-    );
-
-    // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      title: const Text("Encountered error!"),
-      content: Text(errMsg),
-      actions: [
-        okButton,
-      ],
-    );
-
-    // show the dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
-  }
-
-  Future authSignUp() async {
-    // showDialog(
-    //   context: context,
-    //   builder: (context) => const Center(
-    //     child: CircularProgressIndicator(),
-    //   ),
-    //   barrierDismissible: true,
-    //   barrierLabel: 'Loading',
-    // );
-    try {
-      await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(
-              email: emailContr.text.trim(),
-              password: passwordContr.text.trim())
-          .then((value) =>
-              // const Center(
-              //       child: CircularProgressIndicator(),
-              //     )
-              showDialog(
-                context: context,
-                builder: (context) => const Center(
-                  child: Column(
-                    children: [
-                      CircularProgressIndicator(),
-                      Text('click anywhere to dismiss')
-                    ],
-                  ),
-                ),
-                barrierDismissible: true,
-                barrierLabel: 'Loading',
-              ))
-          .whenComplete(
-              () => Navigator.popAndPushNamed(context, '/auth-logic'));
-    } on FirebaseAuthException catch (e) {
-      print(e);
-      showErrorDialog(context, e.message.toString());
-      print(e);
-    }
-
-    // nk.currentState!.popUntil(((route) => route.isFirst)); //
-    // nk.currentState!.popUntil((route) => false);
   }
 }
