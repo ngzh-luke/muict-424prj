@@ -21,7 +21,7 @@ class _LoginViewState extends State<LoginView> {
   final emailContr = TextEditingController();
   final nameContr = TextEditingController();
   final passwordContr = TextEditingController();
-  final navigatorKey = GlobalKey<NavigatorState>();
+  // final navigatorKey = GlobalKey<NavigatorState>();
 
   @override
   void dispose() {
@@ -128,7 +128,10 @@ class _LoginViewState extends State<LoginView> {
             ),
             const SizedBox(height: 16),
             ElevatedButton(
-              onPressed: () => UserObject().authSignIn(context),
+              onPressed: () => UserObject().authSignIn(
+                  context: context,
+                  email: emailContr.text,
+                  password: passwordContr.text),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue,
                 minimumSize: const Size(double.infinity,

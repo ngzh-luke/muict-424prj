@@ -1,16 +1,13 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:travel_diary_app_/src/home_page/add_destination.dart';
 import 'package:travel_diary_app_/src/home_page/calenda_view.dart';
-import 'package:travel_diary_app_/src/settings/settings_controller.dart';
-import 'package:travel_diary_app_/src/settings/settings_view.dart';
 import 'package:travel_diary_app_/src/user_object.dart';
 import 'destination_view.dart';
 
 class HomeView extends StatelessWidget {
   HomeView({super.key});
-  final user = FirebaseAuth.instance.currentUser!;
+  final user = UserObject().currentUser;
 
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
@@ -66,7 +63,7 @@ class HomeView extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(
-              'Hello and welcome back, ${user.email}!',
+              'Hello and welcome back, ${user?.email}!',
               style: const TextStyle(
                 fontSize: 21,
                 fontWeight: FontWeight.bold,

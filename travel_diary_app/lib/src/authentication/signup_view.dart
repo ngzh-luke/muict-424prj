@@ -1,7 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:travel_diary_app_/src/authentication/auth_logic.dart';
+// import 'package:travel_diary_app_/src/authentication/auth_logic.dart';
 import 'package:travel_diary_app_/src/user_object.dart';
 
 class SignupView extends StatefulWidget {
@@ -146,7 +146,10 @@ class _SignupViewState extends State<SignupView> {
             ElevatedButton(
               onPressed: () {
                 // Implement your signup logic
-                UserObject().authSignUp(context);
+                UserObject().authSignUp(
+                    context: context,
+                    email: emailContr.text,
+                    password: passwordContr.text);
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue,

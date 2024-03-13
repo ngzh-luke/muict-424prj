@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'package:travel_diary_app_/src/authentication/login_view.dart';
 import 'package:travel_diary_app_/src/authentication/signup_view.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:travel_diary_app_/src/home_page/home_view.dart';
 import 'package:travel_diary_app_/src/user_object.dart';
@@ -17,7 +17,7 @@ class AuthLogic extends StatefulWidget {
 class _AuthLogicState extends State<AuthLogic> {
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<User?>(
+    return StreamBuilder(
         // stream: FirebaseAuth.instance.authStateChanges(),
         stream: UserObject().authStateChanges,
         builder: (context, snapshot) {
