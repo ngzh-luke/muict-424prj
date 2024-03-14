@@ -54,7 +54,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCdXP1YPUxZeQ6JwFErRiTDvW5KHOpJSIQ',
-    appId: '1:531763124274:android:4270cdd1532579888c442b',
+    appId: '1:531763124274:android:f3523119184a68fa8c442b',
     messagingSenderId: '531763124274',
     projectId: 'muict424prj-traveldiary',
     storageBucket: 'muict424prj-traveldiary.appspot.com',
