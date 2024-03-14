@@ -1,4 +1,5 @@
 // import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:travel_diary_app_/src/home_page/add_destination.dart';
 import 'package:travel_diary_app_/src/home_page/calenda_view.dart';
@@ -40,8 +41,7 @@ class HomeView extends StatelessWidget {
             // Assuming the add button is at index 1
             Navigator.push(
               context,
-              MaterialPageRoute(
-                  builder: (context) => const AddDestinationView()),
+              MaterialPageRoute(builder: (context) => AddDestinationView()),
             );
           } else if (index == 2) {
             // Handle calendar tap
@@ -195,13 +195,19 @@ class DestinationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final buckets = FirebaseFirestore.instance
+        .collection('postBuckets')
+        .where('userID', isEqualTo: {UserObject().getUserUID()}).get();
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => DestinationDetailsView(
-              title: " title",
+            builder: (context) =>
+                // StreamBuilder<QuerySnapshot>(
+                //     stream: snapshotsStream, builder: (context, snapshot){})
+                DestinationDetailsView(
+              title: "this is",
               location: "location",
               description:
                   "This is description", // Pass the actual description to the details view
@@ -252,36 +258,26 @@ final List<Destination> destinations = [
     longitude: 98.8369438,
     description: 'Description of Chilling in Thailand',
   ),
-  Destination(
-    title: 'Chilling in Thailand',
-    location: 'Ao Nang, Krabi',
-    date: '14/02',
-    imageUrl:
-        'https://a.cdn-hotels.com/gdcs/production25/d278/9609fe78-1dd2-47bf-b75d-15df7f6feb8f.jpg',
-    latitude: 8.041492,
-    longitude: 98.8369438,
-    description: 'Description of Chilling in Thailand',
-  ),
-  Destination(
-    title: 'Chilling in Thailand',
-    location: 'Ao Nang, Krabi',
-    date: '14/02',
-    imageUrl:
-        'https://a.cdn-hotels.com/gdcs/production25/d278/9609fe78-1dd2-47bf-b75d-15df7f6feb8f.jpg',
-    latitude: 8.041492,
-    longitude: 98.8369438,
-    description: 'Description of Chilling in Thailand',
-  ),
-  Destination(
-    title: 'Chilling in Thailand',
-    location: 'Ao Nang, Krabi',
-    date: '14/02',
-    imageUrl:
-        'https://a.cdn-hotels.com/gdcs/production25/d278/9609fe78-1dd2-47bf-b75d-15df7f6feb8f.jpg',
-    latitude: 8.041492,
-    longitude: 98.8369438,
-    description: 'Description of Chilling in Thailand',
-  ),
+  // Destination(
+  //   title: 'Chilling in Thailand',
+  //   location: 'Ao Nang, Krabi',
+  //   date: '14/02',
+  //   imageUrl:
+  //       'https://a.cdn-hotels.com/gdcs/production25/d278/9609fe78-1dd2-47bf-b75d-15df7f6feb8f.jpg',
+  //   latitude: 8.041492,
+  //   longitude: 98.8369438,
+  //   description: 'Description of Chilling in Thailand',
+  // ),
+  // Destination(
+  //   title: 'Chilling in Thailand',
+  //   location: 'Ao Nang, Krabi',
+  //   date: '14/02',
+  //   imageUrl:
+  //       'https://a.cdn-hotels.com/gdcs/production25/d278/9609fe78-1dd2-47bf-b75d-15df7f6feb8f.jpg',
+  //   latitude: 8.041492,
+  //   longitude: 98.8369438,
+  //   description: 'Description of Chilling in Thailand',
+  // ),
   // Add more destinations
 ];
 

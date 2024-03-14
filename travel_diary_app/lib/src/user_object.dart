@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'dialoger.dart' as d;
 
 class UserObject {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -88,16 +89,27 @@ class UserObject {
     try {
       await _firebaseAuth.createUserWithEmailAndPassword(
           email: email.trim(), password: password.trim());
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException catch (fbe) {
+      Navigator.of(context, rootNavigator: true).pop();
+      log(fbe.message.toString());
+      // Navigator.of(context, rootNavigator: true).pop();
+      Future.delayed(Duration.zero);
+      showErrorDialog(context, fbe.toString());
+    } catch (e) {
+      Navigator.of(context, rootNavigator: true).pop();
       log(e.toString());
       // Navigator.of(context, rootNavigator: true).pop();
       Future.delayed(Duration.zero);
-      showErrorDialog(context, e.message.toString());
+      showErrorDialog(context, e.toString());
     } finally {
-      Navigator.of(context, rootNavigator: true).pop();
+      // if account is created successfully
+      if (!_firebaseAuth.currentUser!.isAnonymous) {
+        // https://stackoverflow.com/questions/59385404/navigator-pop-wont-close-the-simpledialog-in-flutter
+        Navigator.of(context, rootNavigator: true).pop();
+        d.showSuccessDialog(context, 'Your account has been created',
+            'Account created', null, true);
+      } else {}
     }
-    // Navigator.of(context, rootNavigator: true).pop();
-    // showSuccessDialog(context, 'Your account is created', 'Success!');
     // nk.currentState!.popUntil(((route) => route.isFirst)); //
     // nk.currentState!.popUntil((route) => false);
     // Navigator.of(context, rootNavigator: false)
@@ -119,17 +131,23 @@ class UserObject {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
           email: email.trim(), password: password.trim());
-    } on FirebaseAuthException catch (e) {
-      Future.delayed(const Duration(seconds: 2));
-      showErrorDialog(context, e.message.toString());
+    } on FirebaseAuthException catch (fbe) {
+      Navigator.of(context, rootNavigator: true).pop();
+      log(fbe.message.toString());
+      Future.delayed(Duration.zero);
+      showErrorDialog(context, fbe.toString());
+    } catch (e) {
+      Navigator.of(context, rootNavigator: true).pop();
       log(e.toString());
-      // navigatorKey.currentState!.popUntil(ModalRoute.withName('/login'));
-      // navigatorKey.currentState!.popUntil(((route) => false));
+      Future.delayed(Duration.zero);
+      showErrorDialog(context, e.toString());
     } finally {
       // nk.currentState!.popUntil(ModalRoute.withName('/home'));
-      // https://stackoverflow.com/questions/59385404/navigator-pop-wont-close-the-simpledialog-in-flutter
-      Navigator.of(context, rootNavigator: true)
-          .pop(); // pop indicator out when loading is complete
+      if (!_firebaseAuth.currentUser!.isAnonymous) {
+        // https://stackoverflow.com/questions/59385404/navigator-pop-wont-close-the-simpledialog-in-flutter
+        Navigator.of(context, rootNavigator: true)
+            .pop(); // pop indicator out when loading is complete
+      } else {}
     }
     //     .pop([ModalRoute.withName('/login'), ModalRoute.withName('/home')]);
 

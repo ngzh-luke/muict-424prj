@@ -1,24 +1,46 @@
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:travel_diary_app_/src/dialoger.dart';
 
 class AddDestinationView extends StatelessWidget {
-  const AddDestinationView({Key? key}) : super(key: key);
+  AddDestinationView({super.key});
+
+  final titleCont = TextEditingController();
+  final descCont = TextEditingController();
+  final headingCont = TextEditingController();
+  var savedDate;
+  final collection = FirebaseFirestore.instance.collection('postBuckets');
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Trip'),
+        title: const Text('Add Trip'),
         actions: [
           IconButton(
-            icon: Icon(Icons.save),
+            icon: const Icon(Icons.save),
             onPressed: () {
               // Handle save action
+
+              try {
+                collection.add({
+                  'title': headingCont.text.trim(),
+                  'content': descCont.text.trim()
+                }).whenComplete(() => showSuccessDialog(
+                    context, 'Trip has been added', 'Added!', null, true));
+              } catch (e) {
+                showErrDialog(context,
+                    'Unknown error occured when adding new trip, please try again later');
+                log(e.toString());
+              } finally {}
             },
           ),
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(8.0),
         child: Column(
           children: <Widget>[
             GestureDetector(
@@ -39,30 +61,28 @@ class AddDestinationView extends StatelessWidget {
               ),
             ),
             TextFormField(
-              decoration: InputDecoration(
+              controller: headingCont,
+              decoration: const InputDecoration(
                 labelText: 'Heading',
               ),
             ),
             TextFormField(
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Location',
                 suffixIcon: Icon(Icons.search),
               ),
             ),
             TextFormField(
-              decoration: InputDecoration(
+              controller: descCont,
+              decoration: const InputDecoration(
                 labelText: 'Description',
               ),
               maxLines: 3,
             ),
-            TextFormField(
-              decoration: InputDecoration(
-                labelText: 'Date',
-                suffixIcon: Icon(Icons.calendar_today),
-              ),
-              onTap: () {
-                // Handle date selection
-              },
+            InputDatePickerFormField(
+              firstDate: DateTime.fromMillisecondsSinceEpoch(0),
+              lastDate: DateTime.now(),
+              onDateSaved: (value) => savedDate = value,
             ),
           ],
         ),
