@@ -7,6 +7,25 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:531763124274:android:f3523119184a68fa8c442b",
+        "android_client_info": {
+          "package_name": "com.example.travel_diary_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdXP1YPUxZeQ6JwFErRiTDvW5KHOpJSIQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:531763124274:android:4270cdd1532579888c442b",
         "android_client_info": {
           "package_name": "com.example.travel_diary_app_"
