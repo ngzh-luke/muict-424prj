@@ -23,7 +23,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        return ios;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for ios - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.macOS:
         return macos;
       case TargetPlatform.windows:
@@ -45,7 +48,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyAt4oiNMMB-3fwmJ8cQcBVQNDky4HrokU8',
-    appId: '1:531763124274:web:393f79ff8b28120b8c442b',
+    appId: '1:531763124274:web:0286ab5453e14c738c442b',
     messagingSenderId: '531763124274',
     projectId: 'muict424prj-traveldiary',
     authDomain: 'muict424prj-traveldiary.firebaseapp.com',
@@ -54,24 +57,15 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCdXP1YPUxZeQ6JwFErRiTDvW5KHOpJSIQ',
-    appId: '1:531763124274:android:f3523119184a68fa8c442b',
+    appId: '1:531763124274:android:293cd36e647288828c442b',
     messagingSenderId: '531763124274',
     projectId: 'muict424prj-traveldiary',
     storageBucket: 'muict424prj-traveldiary.appspot.com',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyB-NlMRMzoRF1UE0vTH34U-gcCRkfjvMaY',
-    appId: '1:531763124274:ios:de1ca5d47e08260c8c442b',
-    messagingSenderId: '531763124274',
-    projectId: 'muict424prj-traveldiary',
-    storageBucket: 'muict424prj-traveldiary.appspot.com',
-    iosBundleId: 'com.example.travelDiaryApp',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyB-NlMRMzoRF1UE0vTH34U-gcCRkfjvMaY',
-    appId: '1:531763124274:ios:8662785a7a4a2c598c442b',
+    appId: '1:531763124274:ios:cf249d44f0b9f78a8c442b',
     messagingSenderId: '531763124274',
     projectId: 'muict424prj-traveldiary',
     storageBucket: 'muict424prj-traveldiary.appspot.com',
