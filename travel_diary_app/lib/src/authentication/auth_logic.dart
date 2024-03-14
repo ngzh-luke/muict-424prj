@@ -1,10 +1,10 @@
 import 'dart:developer';
-import 'package:travel_diary_app_/src/authentication/login_view.dart';
-import 'package:travel_diary_app_/src/authentication/signup_view.dart';
+import 'package:travel_diary_app/src/authentication/login_view.dart';
+import 'package:travel_diary_app/src/authentication/signup_view.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:travel_diary_app_/src/home_page/home_view.dart';
-import 'package:travel_diary_app_/src/user_object.dart';
+import 'package:travel_diary_app/src/home_page/home_view.dart';
+import 'package:travel_diary_app/src/helpers/cloud_helpers/user_object.dart';
 
 class AuthLogic extends StatefulWidget {
   const AuthLogic({super.key});

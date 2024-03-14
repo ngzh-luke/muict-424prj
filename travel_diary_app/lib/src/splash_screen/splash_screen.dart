@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:travel_diary_app_/src/authentication/auth_logic.dart';
+import 'package:travel_diary_app/src/authentication/auth_logic.dart';
 
-import '../sample_feature/sample_item_details_view.dart';
-import '../sample_feature/sample_item_list_view.dart';
-import '../settings/settings_controller.dart';
-import '../settings/settings_view.dart';
-
-import '../authentication/login_view.dart';
+// import '../sample_feature/sample_item_details_view.dart';
+// import '../sample_feature/sample_item_list_view.dart';
+// import '../settings/settings_controller.dart';
+// import '../settings/settings_view.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

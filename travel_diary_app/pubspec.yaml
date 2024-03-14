@@ -1,5 +1,5 @@
-name: travel_diary_app_
-description: "A new Flutter project."
+name: travel_diary_app
+description: "A Flutter app to help users to keep track and memmories of their travel places, By GoodBoys team."
 
 # Prevent accidental publishing to pub.dev.
 publish_to: 'none'
@@ -22,7 +22,8 @@ dependencies:
   flutter_form_builder: ^9.2.1
   form_builder_validators: ^9.1.0
   firebase_auth: ^4.17.8
-  get: ^4.4.6
+  firebase_storage: ^11.6.10
+  path_provider: ^2.1.2
 
 dev_dependencies:
   flutter_test:

@@ -1,11 +1,8 @@
-// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-// import 'package:travel_diary_app_/src/authentication/auth_logic.dart';
-import 'package:travel_diary_app_/src/user_object.dart';
+import 'package:travel_diary_app/src/helpers/cloud_helpers/user_object.dart';
 import 'signup_view.dart';
 import 'forgot_password_view.dart';
-// import '../home_page/home_view.dart';
 
 class LoginView extends StatefulWidget {
   // ignore: use_super_parameters
