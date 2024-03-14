@@ -14,14 +14,14 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  google_maps_flutter: ^2.5.3
+  # google_maps_flutter: ^2.5.3
   table_calendar: ^3.0.9
-  firebase_core: ^2.25.4
-  cloud_firestore: ^4.15.5
+  firebase_core: ^2.27.1
+  cloud_firestore: ^4.15.9
   firebase_core_platform_interface: ^5.0.0
-  flutter_form_builder: ^9.2.1
-  form_builder_validators: ^9.1.0
-  firebase_auth: ^4.17.8
+  # flutter_form_builder: ^9.2.1
+  # form_builder_validators: ^9.1.0
+  firebase_auth: ^4.17.9
   firebase_storage: ^11.6.10
   path_provider: ^2.1.2
 

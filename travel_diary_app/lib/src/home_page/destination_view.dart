@@ -98,16 +98,16 @@ class DestinationDetailsView extends StatelessWidget {
                     onPressed: () {
                       // Handle see maps tap
                       // Router to map view with send latlng
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => MapScreen(
-                            title: title,
-                            latitude: latitude,
-                            longitude: longitude,
-                          ),
-                        ),
-                      );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) => MapScreen(
+                      //       title: title,
+                      //       latitude: latitude,
+                      //       longitude: longitude,
+                      //     ),
+                      //   ),
+                      // );
                     },
                     child: Text('See maps'),
                     style: ElevatedButton.styleFrom(
