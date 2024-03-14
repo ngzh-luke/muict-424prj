@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:travel_diary_app_/firebase_options.dart';
+import 'package:travel_diary_app/firebase_options.dart';
 
 import 'src/app.dart';
 import 'src/settings/settings_controller.dart';

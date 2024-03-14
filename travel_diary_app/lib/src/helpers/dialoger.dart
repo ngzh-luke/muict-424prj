@@ -10,7 +10,6 @@ showSuccessDialog(BuildContext context, String msg, String title,
       if (back) {
         Navigator.of(context).pop();
       }
-      // Navigator.pushNamed(context, '/signup');
     },
   );
 
@@ -41,7 +40,8 @@ showSuccessDialog(BuildContext context, String msg, String title,
   );
 }
 
-showErrDialog(BuildContext context, String msg) {
+showErrDialog(BuildContext context, String msg,
+    {String title = 'Encountered error!'}) {
   // set up the button
   Widget okButton = TextButton(
     child: const Text("OK"),
@@ -52,7 +52,7 @@ showErrDialog(BuildContext context, String msg) {
 
   // set up the AlertDialog
   AlertDialog alert = AlertDialog(
-    title: const Text('Error has occured!'),
+    title: Text(title),
     content: Text(msg),
     actions: [okButton],
   );

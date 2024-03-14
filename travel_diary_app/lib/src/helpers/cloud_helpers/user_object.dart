@@ -1,8 +1,7 @@
 import 'dart:developer';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'dialoger.dart' as d;
+import '../dialoger.dart' as d;
 
 class UserObject {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -11,68 +10,7 @@ class UserObject {
 
   Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges();
 
-  final nk = GlobalKey<NavigatorState>();
-
-  showErrorDialog(BuildContext context, String errMsg) {
-    // set up the buttons
-    Widget okButton = TextButton(
-      child: const Text("OK"),
-      onPressed: () {
-        Navigator.of(context).pop(); // dismiss dialog
-        // Navigator.pushNamed(context, '/signup');
-      },
-    );
-
-    // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      title: const Text("Encountered error!"),
-      content: Text(errMsg),
-      actions: [
-        okButton,
-      ],
-    );
-
-    // show the dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
-  }
-
-  showSuccessDialog(BuildContext context, String msg, String title) {
-    // set up the buttons
-    Widget okButton = TextButton(
-      child: const Text("OK"),
-      onPressed: () {
-        Navigator.of(context).pop(); // dismiss dialog
-        // Navigator.pushNamed(context, '/signup');
-      },
-    );
-    Widget toLoginButton = TextButton(
-      child: const Text("Signin now"),
-      onPressed: () {
-        // Navigator.of(context).pop(); // dismiss dialog
-        Navigator.pushNamed(context, '/login');
-      },
-    );
-
-    // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      title: Text(title),
-      content: Text(msg),
-      actions: [okButton, toLoginButton],
-    );
-
-    // show the dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
-  }
+  // final nk = GlobalKey<NavigatorState>();
 
   Future<void> authSignUp(
       {required context,
@@ -94,13 +32,13 @@ class UserObject {
       log(fbe.message.toString());
       // Navigator.of(context, rootNavigator: true).pop();
       Future.delayed(Duration.zero);
-      showErrorDialog(context, fbe.toString());
+      d.showErrDialog(context, fbe.message.toString());
     } catch (e) {
       Navigator.of(context, rootNavigator: true).pop();
       log(e.toString());
       // Navigator.of(context, rootNavigator: true).pop();
       Future.delayed(Duration.zero);
-      showErrorDialog(context, e.toString());
+      d.showErrDialog(context, e.toString());
     } finally {
       // if account is created successfully
       if (!_firebaseAuth.currentUser!.isAnonymous) {
@@ -110,10 +48,6 @@ class UserObject {
             'Account created', null, true);
       } else {}
     }
-    // nk.currentState!.popUntil(((route) => route.isFirst)); //
-    // nk.currentState!.popUntil((route) => false);
-    // Navigator.of(context, rootNavigator: false)
-    //     .popUntil(ModalRoute.withName('/home'));
   }
 
   Future<void> authSignIn(
@@ -135,24 +69,20 @@ class UserObject {
       Navigator.of(context, rootNavigator: true).pop();
       log(fbe.message.toString());
       Future.delayed(Duration.zero);
-      showErrorDialog(context, fbe.toString());
+      d.showErrDialog(context, fbe.message.toString());
     } catch (e) {
       Navigator.of(context, rootNavigator: true).pop();
       log(e.toString());
       Future.delayed(Duration.zero);
-      showErrorDialog(context, e.toString());
+      d.showErrDialog(context, e.toString());
     } finally {
-      // nk.currentState!.popUntil(ModalRoute.withName('/home'));
+      // if log in successfully
       if (!_firebaseAuth.currentUser!.isAnonymous) {
         // https://stackoverflow.com/questions/59385404/navigator-pop-wont-close-the-simpledialog-in-flutter
         Navigator.of(context, rootNavigator: true)
             .pop(); // pop indicator out when loading is complete
       } else {}
     }
-    //     .pop([ModalRoute.withName('/login'), ModalRoute.withName('/home')]);
-
-    // nk.currentState!.popUntil((route) => false); //
-    // nk.currentState!.popUntil(((route) => route.isFirst));
   }
 
   Future authSignOut(BuildContext context) async {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:travel_diary_app_/src/home_page/map_view.dart';
+import 'package:travel_diary_app/src/home_page/map_view.dart';
 
 class DestinationDetailsView extends StatelessWidget {
   final String title;
@@ -108,13 +108,12 @@ class DestinationDetailsView extends StatelessWidget {
                           ),
                         ),
                       );
-
-
                     },
                     child: Text('See maps'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue,
-                      padding: EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 32, vertical: 16),
                     ),
                   ),
                 ),
