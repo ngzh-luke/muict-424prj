@@ -90,3 +90,33 @@ showGenDialog(BuildContext context, String msg, String title) {
     },
   );
 }
+
+showActionDialog(BuildContext context, String msg,
+    {String title = "What's next?",
+    action,
+    String actionName = 'action'}) async* {
+  // set up the button
+  Widget okButton = TextButton(
+    child: const Text("Dismiss"),
+    onPressed: () {
+      Navigator.of(context).pop(); // dismiss dialog
+    },
+  );
+
+  Widget actionBtn = TextButton(onPressed: action, child: Text(actionName));
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: Text(title),
+    content: Text(msg),
+    actions: [okButton, actionBtn],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+}
