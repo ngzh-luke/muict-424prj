@@ -142,39 +142,45 @@ class _AddDestinationViewState extends State<AddDestinationView> {
               children: [
                 const Text('Date & Time:'),
                 const Spacer(),
-                ElevatedButton(
-                    onPressed: () async {
-                      final date = await datePicker(context);
-                      if (date == null) {
-                        return; // click cancel
-                      } else {
-                        setState(() {
-                          savedDateTime = date;
-                        });
-                        // setState(() {
-                        //   savedDateTime = DateTime.now();
-                        // });
-                      }
-                    },
-                    child: Text(
-                        '${savedDateTime.year}-${savedDateTime.month}-${savedDateTime.day}')),
-                ElevatedButton(
-                    onPressed: () async {
-                      final time = await pickTime(context);
-                      if (time == null) {
-                        return; // click cancel
-                      } else {
-                        setState(() {
-                          savedDateTime = DateTime(
-                              savedDateTime.year,
-                              savedDateTime.month,
-                              savedDateTime.day,
-                              time.hour,
-                              time.minute);
-                        });
-                      }
-                    },
-                    child: Text('$h:$m'))
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                      onPressed: () async {
+                        final date = await datePicker(context);
+                        if (date == null) {
+                          return; // click cancel
+                        } else {
+                          setState(() {
+                            savedDateTime = date;
+                          });
+                          // setState(() {
+                          //   savedDateTime = DateTime.now();
+                          // });
+                        }
+                      },
+                      child: Text(
+                          '${savedDateTime.year}-${savedDateTime.month}-${savedDateTime.day}')),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                      onPressed: () async {
+                        final time = await pickTime(context);
+                        if (time == null) {
+                          return; // click cancel
+                        } else {
+                          setState(() {
+                            savedDateTime = DateTime(
+                                savedDateTime.year,
+                                savedDateTime.month,
+                                savedDateTime.day,
+                                time.hour,
+                                time.minute);
+                          });
+                        }
+                      },
+                      child: Text('$h:$m')),
+                )
               ],
             )
             // InputDatePickerFormField(

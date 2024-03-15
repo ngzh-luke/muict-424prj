@@ -1,6 +1,7 @@
 // import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:travel_diary_app/src/diaries.dart';
 import 'package:travel_diary_app/src/helpers/cloud_helpers/storage_object.dart';
 import 'package:travel_diary_app/src/helpers/dialoger.dart';
 import 'package:travel_diary_app/src/home_page/add_destination.dart';
@@ -33,7 +34,7 @@ class HomeView extends StatelessWidget {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.add),
-            label: '',
+            label: 'New Trip',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.calendar_today),
@@ -91,25 +92,29 @@ class HomeView extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
-            height: 250, // Adjust the height to fit the card
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: destinations
-                  .length, // Assuming 'destinations' is a list of your destinations
-              itemBuilder: (BuildContext context, int index) {
-                final destination = destinations[index];
-                return DestinationCard(
-                  title: destination.title,
-                  location: destination.location,
-                  date: destination.date,
-                  imageUrl: destination.imageUrl,
-                  latitude: destination.latitude, // Pass the actual latitude
-                  longitude: destination.longitude, // Pass the actual longitude
-                  description:
-                      destination.description, // Pass the actual description
-                );
-              },
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0, right: 4.0),
+            child: SizedBox(
+              height: double.maxFinite, // Adjust the height to fit the card
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: destinations
+                    .length, // Assuming 'destinations' is a list of your destinations
+                itemBuilder: (BuildContext context, int index) {
+                  final destination = destinations[index];
+                  return DestinationCard(
+                    title: destination.title,
+                    location: destination.location,
+                    date: destination.date,
+                    imageUrl: destination.imageUrl,
+                    latitude: destination.latitude, // Pass the actual latitude
+                    longitude:
+                        destination.longitude, // Pass the actual longitude
+                    description:
+                        destination.description, // Pass the actual description
+                  );
+                },
+              ),
             ),
           ),
           // Other widgets and content would follow
@@ -248,6 +253,10 @@ class DestinationCard extends StatelessWidget {
             ),
           ),
         ),
+        ElevatedButton(
+            onPressed: () => Navigator.push(context,
+                MaterialPageRoute(builder: (context) => DiariesRender())),
+            child: const Text("to diaries"))
         // ElevatedButton(
         //     onPressed: () => showGenDialog(
         //         context,
@@ -271,16 +280,16 @@ final List<Destination> destinations = [
     longitude: 98.8369438,
     description: 'Description of Chilling in Thailand',
   ),
-  // Destination(
-  //   title: 'Chilling in Thailand',
-  //   location: 'Ao Nang, Krabi',
-  //   date: '14/02',
-  //   imageUrl:
-  //       'https://a.cdn-hotels.com/gdcs/production25/d278/9609fe78-1dd2-47bf-b75d-15df7f6feb8f.jpg',
-  //   latitude: 8.041492,
-  //   longitude: 98.8369438,
-  //   description: 'Description of Chilling in Thailand',
-  // ),
+  Destination(
+    title: 'Chilling in Thailand',
+    location: 'Ao Nang, Krabi',
+    date: '14/02',
+    imageUrl:
+        'https://a.cdn-hotels.com/gdcs/production25/d278/9609fe78-1dd2-47bf-b75d-15df7f6feb8f.jpg',
+    latitude: 8.041492,
+    longitude: 98.8369438,
+    description: 'Description of Chilling in Thailand',
+  ),
   // Destination(
   //   title: 'Chilling in Thailand',
   //   location: 'Ao Nang, Krabi',
