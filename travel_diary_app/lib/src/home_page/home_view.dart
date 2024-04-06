@@ -1,7 +1,8 @@
 // import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:travel_diary_app/src/diaries.dart';
+import 'package:travel_diary_app/src/diaries/all_diaries.dart';
+import 'package:travel_diary_app/src/diaries/my_diaries.dart';
 import 'package:travel_diary_app/src/helpers/cloud_helpers/storage_object.dart';
 import 'package:travel_diary_app/src/helpers/dialoger.dart';
 import 'package:travel_diary_app/src/home_page/add_destination.dart';
@@ -93,30 +94,31 @@ class HomeView extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 8.0, right: 4.0),
+            padding: const EdgeInsets.only(
+                left: 8.0, right: 4.0, top: 16.0, bottom: 16.0),
             child: SizedBox(
-              height: double.maxFinite, // Adjust the height to fit the card
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: destinations
-                    .length, // Assuming 'destinations' is a list of your destinations
-                itemBuilder: (BuildContext context, int index) {
-                  final destination = destinations[index];
-                  return DestinationCard(
-                    title: destination.title,
-                    location: destination.location,
-                    date: destination.date,
-                    imageUrl: destination.imageUrl,
-                    latitude: destination.latitude, // Pass the actual latitude
-                    longitude:
-                        destination.longitude, // Pass the actual longitude
-                    description:
-                        destination.description, // Pass the actual description
-                  );
-                },
+              height: 160, //
+              child: MyDiariesRender(),
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.all(14),
+            child: Text(
+              "Explore from other peoples' destination",
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0, right: 4.0, bottom: 8.0),
+            child: SizedBox(
+              height: 160, //
+              child: AllDiariesRender(),
+            ),
+          )
+
           // Other widgets and content would follow
         ],
       ),
@@ -253,10 +255,10 @@ class DestinationCard extends StatelessWidget {
             ),
           ),
         ),
-        ElevatedButton(
-            onPressed: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => DiariesRender())),
-            child: const Text("to diaries"))
+        // ElevatedButton(
+        //     onPressed: () => Navigator.push(context,
+        //         MaterialPageRoute(builder: (context) => DiariesRender())),
+        //     child: const Text("to diaries"))
         // ElevatedButton(
         //     onPressed: () => showGenDialog(
         //         context,
