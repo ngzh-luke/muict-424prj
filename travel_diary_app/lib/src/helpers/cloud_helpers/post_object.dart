@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:travel_diary_app/src/helpers/diary.dart';
 
 final collection = FirebaseFirestore.instance.collection('postBuckets');
 

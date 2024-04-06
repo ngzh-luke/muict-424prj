@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:travel_diary_app/src/helpers/cloud_helpers/post_object.dart';
 
 class Diary {
   final String userID;

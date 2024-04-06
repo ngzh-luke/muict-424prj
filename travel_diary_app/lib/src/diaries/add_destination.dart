@@ -101,11 +101,11 @@ class _AddDestinationViewState extends State<AddDestinationView> {
                   color: Colors.grey[300], // Placeholder color
                   borderRadius: BorderRadius.circular(12),
                 ),
+                alignment: Alignment.center,
                 child: Icon(
                   Icons.camera_alt, // Placeholder icon
                   color: Colors.grey[600],
                 ),
-                alignment: Alignment.center,
               ),
             ),
             TextFormField(
@@ -123,7 +123,7 @@ class _AddDestinationViewState extends State<AddDestinationView> {
               controller: locaCont,
               decoration: const InputDecoration(
                 labelText: 'Location',
-                suffixIcon: Icon(Icons.search),
+                suffixIcon: Icon(Icons.location_on),
               ),
             ),
             TextFormField(
