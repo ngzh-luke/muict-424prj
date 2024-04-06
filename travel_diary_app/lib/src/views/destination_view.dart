@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:travel_diary_app/src/diaries/edit_d.dart';
 import 'package:travel_diary_app/src/helpers/cloud_helpers/user_object.dart';
 
@@ -8,6 +9,7 @@ class DestinationDetailsView extends StatelessWidget {
   final String description;
   final String imageUrl;
   final String date;
+  final String dateT;
   final String userID;
   final double latitude;
   final double longitude;
@@ -24,10 +26,13 @@ class DestinationDetailsView extends StatelessWidget {
     required this.date,
     required this.latitude,
     required this.longitude,
+    required this.dateT,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final String formated_dateTime =
+        DateFormat('yyyy.MM.dd @HH:mm').format(DateTime.parse(dateT));
     return Scaffold(
       appBar: AppBar(
         title: Text('Details: $title'),
@@ -82,7 +87,7 @@ class DestinationDetailsView extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      "When: $date",
+                      "When: $formated_dateTime",
                       style: TextStyle(
                         fontSize: 18,
                         color: Colors.grey[600],
@@ -162,7 +167,7 @@ class DestinationDetailsView extends StatelessWidget {
                         location: location,
                         description: description,
                         imageUrl: imageUrl,
-                        dateTime: DateTime.parse(date),
+                        dateTime: DateTime.parse(dateT),
                       )),
             );
           },

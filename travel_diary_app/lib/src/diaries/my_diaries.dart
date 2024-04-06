@@ -82,8 +82,10 @@ class _MyDiariesRenderState extends State<MyDiariesRender> {
             title: diary['title'] ?? 'No Title',
             location: diary['location'] ?? 'No Location',
             date: diary['when'] != null
+                ? DateFormat('yyyy.MM.dd').format(dateTime)
+                : 'No Date',
+            dateT: diary['when'] != null
                 ? diary['when'].toDate().toString()
-                // DateFormat('yyyy.MM.dd').format(dateTime)
                 : 'No Date',
             imageStoragePath: diary['attachment'] ?? '',
             latitude: diary['latitude'] ?? 0.0,
@@ -93,7 +95,7 @@ class _MyDiariesRenderState extends State<MyDiariesRender> {
         },
       );
     } else {
-      return const Center(child: Text('No data available'));
+      return const Center(child: Text('No data available, try add one!'));
     }
   }
 }
