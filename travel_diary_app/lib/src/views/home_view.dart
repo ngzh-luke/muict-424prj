@@ -61,7 +61,7 @@ class HomeView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(12.0),
             child: Text(
               'Hello and welcome back, ${user?.email}!',
               style: const TextStyle(
@@ -71,14 +71,14 @@ class HomeView extends StatelessWidget {
             ),
           ),
           const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: 15.0),
             child: Text(
               "Explore the Beautiful World",
               style: TextStyle(color: Colors.cyan, fontSize: 26),
             ),
           ),
           const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 22.0),
+            padding: EdgeInsets.all(12.0),
             child: Text(
               'Your Destinations',
               style: TextStyle(
@@ -89,14 +89,14 @@ class HomeView extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.only(
-                left: 8.0, right: 4.0, top: 16.0, bottom: 14.0),
+                left: 8.0, right: 4.0, top: 5.0, bottom: 8.0),
             child: SizedBox(
               height: 200, //
               child: MyDiariesRender(),
             ),
           ),
           const Padding(
-            padding: EdgeInsets.all(14),
+            padding: EdgeInsets.all(8.0),
             child: Text(
               "Explore from other peoples' destinations",
               style: TextStyle(

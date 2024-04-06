@@ -62,8 +62,7 @@ class DestinationDetailsView extends StatelessWidget {
                       )
                     : Image.network(
                         imageUrl,
-                        height: 250,
-                        fit: BoxFit.cover,
+                        fit: BoxFit.contain,
                       ),
               ),
               Container(
