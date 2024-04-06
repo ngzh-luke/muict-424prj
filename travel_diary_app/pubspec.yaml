@@ -17,12 +17,12 @@ dependencies:
   # google_maps_flutter: ^2.5.3
   table_calendar: ^3.0.9
   firebase_core: ^2.27.1
-  cloud_firestore: ^4.15.9
+  cloud_firestore: ^4.16.0
   firebase_core_platform_interface: ^5.0.0
   # flutter_form_builder: ^9.2.1
   # form_builder_validators: ^9.1.0
-  firebase_auth: ^4.17.9
-  firebase_storage: ^11.6.10
+  firebase_auth: ^4.19.0
+  firebase_storage: ^11.7.0
   path_provider: ^2.1.2
   cached_network_image: ^3.3.1
   gap: ^3.0.1
@@ -31,7 +31,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^3.0.0
+  flutter_lints: ^3.0.2
 
 flutter:
   uses-material-design: true
