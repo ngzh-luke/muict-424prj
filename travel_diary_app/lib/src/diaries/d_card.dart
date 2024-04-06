@@ -12,6 +12,7 @@ class DestinationCard extends StatelessWidget {
   final double latitude;
   final double longitude;
   final String description;
+  final String dateT;
   final firebase_storage.FirebaseStorage storage =
       firebase_storage.FirebaseStorage.instance;
 
@@ -26,6 +27,7 @@ class DestinationCard extends StatelessWidget {
     required this.latitude,
     required this.longitude,
     required this.description,
+    required this.dateT,
   }) : super(key: key);
 
   @override
@@ -45,6 +47,7 @@ class DestinationCard extends StatelessWidget {
                   description: description,
                   imageUrl: imageStoragePath, // Pass the storage path
                   date: date,
+                  dateT: dateT,
                   latitude: latitude,
                   longitude: longitude,
                 ),

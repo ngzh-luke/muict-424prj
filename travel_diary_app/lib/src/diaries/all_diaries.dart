@@ -85,8 +85,10 @@ class _AllDiariesRenderState extends State<AllDiariesRender> {
             title: diary['title'] ?? 'No Title',
             location: diary['location'] ?? 'No Location',
             date: diary['when'] != null
+                ? DateFormat('yyyy.MM.dd').format(dateTime)
+                : 'No Date',
+            dateT: diary['when'] != null
                 ? diary['when'].toDate().toString()
-                // DateFormat('yyyy.MM.dd').format(dateTime)
                 : 'No Date',
             imageStoragePath: diary['attachment'] ?? '',
             latitude: diary['latitude'] ?? 0.0,
