@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:travel_diary_app/src/diaries/edit_d.dart';
+import 'package:travel_diary_app/src/helpers/cloud_helpers/user_object.dart';
 
 class DestinationDetailsView extends StatelessWidget {
   final String title;
   final String location;
   final String description;
   final String imageUrl;
-  final String date; // Assuming you might want to use the date somewhere
+  final String date;
+  final String userID;
   final double latitude;
   final double longitude;
   final String id;
@@ -14,6 +16,7 @@ class DestinationDetailsView extends StatelessWidget {
   const DestinationDetailsView({
     Key? key,
     required this.id,
+    required this.userID,
     required this.title,
     required this.location,
     required this.description,
@@ -35,27 +38,7 @@ class DestinationDetailsView extends StatelessWidget {
           onPressed: () => Navigator.of(context).pop(),
         ),
         actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: IconButton(
-              icon: const Icon(Icons.edit, color: Colors.blue),
-              onPressed: () {
-                // Handle action, navigate to edit
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => EditDestinationView(
-                            id: id,
-                            title: title,
-                            location: location,
-                            description: description,
-                            imageUrl: imageUrl,
-                            dateTime: DateTime.parse(date),
-                          )),
-                );
-              },
-            ),
-          ),
+          editIcon(context),
         ],
       ),
       extendBodyBehindAppBar: true,
@@ -160,5 +143,33 @@ class DestinationDetailsView extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget editIcon(BuildContext context) {
+    if (UserObject().getUserUID().toString() == userID) {
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: IconButton(
+          icon: const Icon(Icons.edit, color: Colors.blue),
+          onPressed: () {
+            // Handle action, navigate to edit
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => EditDestinationView(
+                        id: id,
+                        title: title,
+                        location: location,
+                        description: description,
+                        imageUrl: imageUrl,
+                        dateTime: DateTime.parse(date),
+                      )),
+            );
+          },
+        ),
+      );
+    } else {
+      return const Center();
+    }
   }
 }

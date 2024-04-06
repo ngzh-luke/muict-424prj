@@ -3,6 +3,7 @@ import 'package:travel_diary_app/src/views/destination_view.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class DestinationCard extends StatelessWidget {
+  final String userID;
   final String id;
   final String title;
   final String location;
@@ -16,6 +17,7 @@ class DestinationCard extends StatelessWidget {
 
   DestinationCard({
     Key? key,
+    required this.userID,
     required this.id,
     required this.title,
     required this.location,
@@ -36,6 +38,7 @@ class DestinationCard extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) => DestinationDetailsView(
+                  userID: userID,
                   id: id,
                   title: title,
                   location: location,

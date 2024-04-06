@@ -77,6 +77,7 @@ class _MyDiariesRenderState extends State<MyDiariesRender> {
           final dateTime =
               diary['when'] != null ? diary['when'].toDate() : null;
           return DestinationCard(
+            userID: userId,
             id: diaries[index].id,
             title: diary['title'] ?? 'No Title',
             location: diary['location'] ?? 'No Location',
