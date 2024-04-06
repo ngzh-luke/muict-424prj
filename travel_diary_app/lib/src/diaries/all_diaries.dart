@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:travel_diary_app/src/diaries/d_card.dart';
 import 'package:travel_diary_app/src/helpers/cloud_helpers/post_object.dart'
     as p;
 import 'package:travel_diary_app/src/helpers/cloud_helpers/user_object.dart';
 import 'package:travel_diary_app/src/helpers/dialoger.dart';
-import 'package:travel_diary_app/src/home_page/home_view.dart';
 import 'package:intl/intl.dart';
 
 class AllDiariesRender extends StatefulWidget {
@@ -41,7 +41,7 @@ class _AllDiariesRenderState extends State<AllDiariesRender> {
 
   Future<Widget> stream() async {
     return StreamBuilder<QuerySnapshot>(
-      stream: p.collectionStream,
+      stream: p.collection.orderBy('updatedTS', descending: true).snapshots(),
       initialData: null,
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError) {
@@ -80,10 +80,10 @@ class _AllDiariesRenderState extends State<AllDiariesRender> {
             date: diary['when'] != null
                 ? DateFormat('yyyy.MM.dd').format(dateTime)
                 : 'No Date',
-            imageUrl: diary['imageUrl'] ?? 'No Image URL',
+            imageStoragePath: diary['attachment'] ?? '',
             latitude: diary['latitude'] ?? 0.0,
             longitude: diary['longitude'] ?? 0.0,
-            description: diary['description'] ?? 'No Description',
+            description: diary['content'] ?? 'No Description',
           );
         },
       );
