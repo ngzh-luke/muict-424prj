@@ -27,6 +27,8 @@ dependencies:
   cached_network_image: ^3.3.1
   gap: ^3.0.1
   intl: ^0.18.1
+  file_picker: ^8.0.0+1
+  path: ^1.9.0
 
 dev_dependencies:
   flutter_test:

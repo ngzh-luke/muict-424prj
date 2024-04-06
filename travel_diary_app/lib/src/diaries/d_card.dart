@@ -62,7 +62,10 @@ class DestinationCard extends StatelessWidget {
                             'assets/logo.png',
                             fit: BoxFit.scaleDown,
                           )
-                        : cloudImg(),
+                        : Image.network(
+                            imageStoragePath,
+                            fit: BoxFit.cover,
+                          ),
                   ),
                   ListTile(
                     title: Text(title),
@@ -75,22 +78,6 @@ class DestinationCard extends StatelessWidget {
         ),
       ],
     );
-  }
-
-  FutureBuilder<String> cloudImg() {
-    return FutureBuilder<String>(
-        future: getImageUrl(imageStoragePath),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return Image.network(
-              snapshot.data!,
-              fit: BoxFit.cover,
-              height: 140,
-            );
-          } else {
-            return const SizedBox.shrink(); // or a placeholder widget
-          }
-        });
   }
 
   Future<String> getImageUrl(String imagePath) async {

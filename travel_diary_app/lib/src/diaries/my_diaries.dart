@@ -66,7 +66,9 @@ class _MyDiariesRenderState extends State<MyDiariesRender> {
           .where((doc) => doc.get('userID') == userId)
           .toList();
       // print(diaries.length.toString());
-
+      if (diaries.isEmpty) {
+        return const Center(child: Text('No data available'));
+      }
       return ListView.builder(
         itemCount: diaries.length,
         scrollDirection: Axis.horizontal,
