@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:travel_diary_app/src/diaries/edit_d.dart';
 
 class DestinationDetailsView extends StatelessWidget {
   final String title;
@@ -8,9 +9,11 @@ class DestinationDetailsView extends StatelessWidget {
   final String date; // Assuming you might want to use the date somewhere
   final double latitude;
   final double longitude;
+  final String id;
 
   const DestinationDetailsView({
     Key? key,
+    required this.id,
     required this.title,
     required this.location,
     required this.description,
@@ -37,11 +40,19 @@ class DestinationDetailsView extends StatelessWidget {
             child: IconButton(
               icon: const Icon(Icons.edit, color: Colors.blue),
               onPressed: () {
-                // Handle action, e.g., navigate to home
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => HomeView()),
-                // );
+                // Handle action, navigate to edit
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => EditDestinationView(
+                            id: id,
+                            title: title,
+                            location: location,
+                            description: description,
+                            imageUrl: imageUrl,
+                            dateTime: DateTime.parse(date),
+                          )),
+                );
               },
             ),
           ),
@@ -73,24 +84,32 @@ class DestinationDetailsView extends StatelessWidget {
                     Text(
                       title,
                       style: const TextStyle(
-                        fontSize: 24,
+                        fontSize: 26,
                         fontWeight: FontWeight.bold,
                         color: Colors.amber,
                       ),
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      location,
+                      "Where: $location",
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.grey[600],
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      "When: $date",
                       style: TextStyle(
                         fontSize: 18,
                         color: Colors.grey[600],
                       ),
                     ),
                     const SizedBox(height: 16),
-                    const Text(
-                      'About Destination',
-                      style: TextStyle(
-                          fontSize: 20,
+                    Text(
+                      'About $title',
+                      style: const TextStyle(
+                          fontSize: 26,
                           fontWeight: FontWeight.bold,
                           color: Colors.amber),
                     ),

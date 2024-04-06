@@ -44,6 +44,7 @@ class _AddDestinationViewState extends State<AddDestinationView> {
         title: const Text('Add Trip'),
         actions: [
           IconButton(
+            color: Colors.blue,
             icon: const Icon(Icons.save),
             onPressed: () {
               // Handle save action
