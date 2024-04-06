@@ -5,6 +5,7 @@ import 'package:travel_diary_app/src/helpers/cloud_helpers/post_object.dart'
 import 'package:travel_diary_app/src/helpers/cloud_helpers/user_object.dart';
 import 'package:travel_diary_app/src/helpers/dialoger.dart';
 import 'package:travel_diary_app/src/home_page/home_view.dart';
+import 'package:intl/intl.dart';
 
 class MyDiariesRender extends StatefulWidget {
   MyDiariesRender({super.key});
@@ -64,18 +65,20 @@ class _MyDiariesRenderState extends State<MyDiariesRender> {
       final diaries = snapshot.data!.docs
           .where((doc) => doc.get('userID') == userId)
           .toList();
-      print(diaries.length.toString());
+      // print(diaries.length.toString());
 
       return ListView.builder(
         itemCount: diaries.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (BuildContext context, int index) {
           final diary = diaries[index].data() as Map<String, dynamic>;
+          final dateTime =
+              diary['when'] != null ? diary['when'].toDate() : null;
           return DestinationCard(
             title: diary['title'] ?? 'No Title',
             location: diary['location'] ?? 'No Location',
-            date: diary['date'] != null
-                ? diary['date'].toDate().toString()
+            date: diary['when'] != null
+                ? DateFormat('yyyy.MM.dd').format(dateTime)
                 : 'No Date',
             imageUrl: diary['imageUrl'] ?? 'No Image URL',
             latitude: diary['latitude'] ?? 0.0,

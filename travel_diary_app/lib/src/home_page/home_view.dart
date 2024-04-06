@@ -1,10 +1,6 @@
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:travel_diary_app/src/diaries/all_diaries.dart';
 import 'package:travel_diary_app/src/diaries/my_diaries.dart';
-import 'package:travel_diary_app/src/helpers/cloud_helpers/storage_object.dart';
-import 'package:travel_diary_app/src/helpers/dialoger.dart';
 import 'package:travel_diary_app/src/home_page/add_destination.dart';
 import 'package:travel_diary_app/src/home_page/calenda_view.dart';
 import 'package:travel_diary_app/src/helpers/cloud_helpers/user_object.dart';
@@ -86,7 +82,7 @@ class HomeView extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.0),
             child: Text(
-              'Your Destination',
+              'Your Destinations',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -104,7 +100,7 @@ class HomeView extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.all(14),
             child: Text(
-              "Explore from other peoples' destination",
+              "Explore from other peoples' destinations",
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -206,8 +202,6 @@ class DestinationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final buckets = p.collection
-        .where('userID', isEqualTo: {UserObject().getUserUID()}).get();
     return Column(
       children: [
         GestureDetector(
@@ -271,39 +265,39 @@ class DestinationCard extends StatelessWidget {
 }
 
 // Assuming you have a list of destinations like this
-final List<Destination> destinations = [
-  Destination(
-    title: 'Chilling in Thailand',
-    location: 'Ao Nang, Krabi',
-    date: '14/02',
-    imageUrl:
-        'https://a.cdn-hotels.com/gdcs/production25/d278/9609fe78-1dd2-47bf-b75d-15df7f6feb8f.jpg',
-    latitude: 8.041492,
-    longitude: 98.8369438,
-    description: 'Description of Chilling in Thailand',
-  ),
-  Destination(
-    title: 'Chilling in Thailand',
-    location: 'Ao Nang, Krabi',
-    date: '14/02',
-    imageUrl:
-        'https://a.cdn-hotels.com/gdcs/production25/d278/9609fe78-1dd2-47bf-b75d-15df7f6feb8f.jpg',
-    latitude: 8.041492,
-    longitude: 98.8369438,
-    description: 'Description of Chilling in Thailand',
-  ),
-  // Destination(
-  //   title: 'Chilling in Thailand',
-  //   location: 'Ao Nang, Krabi',
-  //   date: '14/02',
-  //   imageUrl:
-  //       'https://a.cdn-hotels.com/gdcs/production25/d278/9609fe78-1dd2-47bf-b75d-15df7f6feb8f.jpg',
-  //   latitude: 8.041492,
-  //   longitude: 98.8369438,
-  //   description: 'Description of Chilling in Thailand',
-  // ),
-  // Add more destinations
-];
+// final List<Destination> destinations = [
+//   Destination(
+//     title: 'Chilling in Thailand',
+//     location: 'Ao Nang, Krabi',
+//     date: '14/02',
+//     imageUrl:
+//         'https://a.cdn-hotels.com/gdcs/production25/d278/9609fe78-1dd2-47bf-b75d-15df7f6feb8f.jpg',
+//     latitude: 8.041492,
+//     longitude: 98.8369438,
+//     description: 'Description of Chilling in Thailand',
+//   ),
+//   Destination(
+//     title: 'Chilling in Thailand',
+//     location: 'Ao Nang, Krabi',
+//     date: '14/02',
+//     imageUrl:
+//         'https://a.cdn-hotels.com/gdcs/production25/d278/9609fe78-1dd2-47bf-b75d-15df7f6feb8f.jpg',
+//     latitude: 8.041492,
+//     longitude: 98.8369438,
+//     description: 'Description of Chilling in Thailand',
+//   ),
+//   // Destination(
+//   //   title: 'Chilling in Thailand',
+//   //   location: 'Ao Nang, Krabi',
+//   //   date: '14/02',
+//   //   imageUrl:
+//   //       'https://a.cdn-hotels.com/gdcs/production25/d278/9609fe78-1dd2-47bf-b75d-15df7f6feb8f.jpg',
+//   //   latitude: 8.041492,
+//   //   longitude: 98.8369438,
+//   //   description: 'Description of Chilling in Thailand',
+//   // ),
+//   // Add more destinations
+// ];
 
 class Destination {
   final String title;

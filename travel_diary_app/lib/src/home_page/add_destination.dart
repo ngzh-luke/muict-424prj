@@ -15,11 +15,13 @@ class AddDestinationView extends StatefulWidget {
 class _AddDestinationViewState extends State<AddDestinationView> {
   final topicCont = TextEditingController();
   final descCont = TextEditingController();
+  final locaCont = TextEditingController();
 
   @override
   void dispose() {
     topicCont.dispose();
     descCont.dispose();
+    locaCont.dispose();
     super.dispose();
   }
 
@@ -40,7 +42,7 @@ class _AddDestinationViewState extends State<AddDestinationView> {
             onPressed: () {
               // Handle save action
               // bool canSubmit = true;
-              if ((_errorText(topicCont, 3) == null)) {
+              if (_errorText(topicCont, 3) == null) {
                 // if met required condition (title text length is must at least more than 3)
                 // if ((descCont.text.isEmpty)) {
                 //   // if desc box is empty
@@ -63,6 +65,7 @@ class _AddDestinationViewState extends State<AddDestinationView> {
                     'userID': UserObject().getUserUID(),
                     'title': topicCont.text.trim(),
                     'content': descCont.text.trim(),
+                    'location': locaCont.text.trim(),
                     'when': savedDateTime,
                     'updatedTS': DateTime.now()
                   }).whenComplete(() => showSuccessDialog(
@@ -117,6 +120,7 @@ class _AddDestinationViewState extends State<AddDestinationView> {
               }),
             ),
             TextFormField(
+              controller: locaCont,
               decoration: const InputDecoration(
                 labelText: 'Location',
                 suffixIcon: Icon(Icons.search),
