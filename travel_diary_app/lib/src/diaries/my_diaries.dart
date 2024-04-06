@@ -77,10 +77,12 @@ class _MyDiariesRenderState extends State<MyDiariesRender> {
           final dateTime =
               diary['when'] != null ? diary['when'].toDate() : null;
           return DestinationCard(
+            id: diaries[index].id,
             title: diary['title'] ?? 'No Title',
             location: diary['location'] ?? 'No Location',
             date: diary['when'] != null
-                ? DateFormat('yyyy.MM.dd').format(dateTime)
+                ? diary['when'].toDate().toString()
+                // DateFormat('yyyy.MM.dd').format(dateTime)
                 : 'No Date',
             imageStoragePath: diary['attachment'] ?? '',
             latitude: diary['latitude'] ?? 0.0,

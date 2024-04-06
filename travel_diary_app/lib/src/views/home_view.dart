@@ -63,7 +63,7 @@ class HomeView extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: Text(
-              'Hello and welcome back, ${user?.email}!',
+              'Welcome back, ${user?.email}!',
               style: const TextStyle(
                 fontSize: 21,
                 fontWeight: FontWeight.bold,
@@ -96,7 +96,7 @@ class HomeView extends StatelessWidget {
             ),
           ),
           const Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(6.0),
             child: Text(
               "Explore from other peoples' destinations",
               style: TextStyle(
@@ -112,7 +112,7 @@ class HomeView extends StatelessWidget {
               child: AllDiariesRender(),
             ),
           ),
-          const Gap(1),
+          const Gap(2),
 
           // Other widgets and content would follow
         ],
@@ -154,11 +154,24 @@ class HomeView extends StatelessWidget {
       child: ListView(
         padding: const EdgeInsets.all(1),
         children: [
-          const DrawerHeader(
-            decoration: BoxDecoration(
+          DrawerHeader(
+            decoration: const BoxDecoration(
               color: Colors.blue,
             ),
-            child: Text('Good Boys'),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Good Boys',
+                  style: TextStyle(
+                      fontSize: 25,
+                      color: Colors.amber,
+                      fontWeight: FontWeight.bold),
+                ),
+                Text(user!.email.toString()),
+              ],
+            ),
           ),
           ListTile(
             title: const Text('Home'),
