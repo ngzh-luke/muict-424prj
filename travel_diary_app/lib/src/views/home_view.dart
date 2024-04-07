@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:travel_diary_app/src/diaries/all_diaries.dart';
 import 'package:travel_diary_app/src/diaries/my_diaries.dart';
 import 'package:travel_diary_app/src/diaries/add_destination.dart';
+import 'package:travel_diary_app/src/helpers/dialoger.dart';
 import 'package:travel_diary_app/src/views/calendar_view.dart';
 import 'package:travel_diary_app/src/helpers/cloud_helpers/user_object.dart';
 import 'package:gap/gap.dart';
@@ -123,29 +125,41 @@ class HomeView extends StatelessWidget {
   AppBar headBar() {
     return AppBar(
       leading: Builder(builder: (BuildContext context) {
-        return IconButton(
-          icon: CircleAvatar(
-            backgroundColor: Colors.indigo[200],
-            child: const Icon(
-              Icons.person,
-              color: Colors.white,
-            ),
-          ),
-          // open left drawer after click on profile icon
-          onPressed: () => Scaffold.of(context).openDrawer(),
-        );
+        return personIcon(context);
       }),
       title: const Text("Travel Diary"),
       actions: [
-        IconButton(
-          icon: const Icon(Icons.public),
-          onPressed: () {
-            // Handle action (e.g., open a map)
-          },
-        ),
+        Builder(builder: (BuildContext context) {
+          return globeIcon(context);
+        }),
       ],
       backgroundColor: Colors.orange,
       elevation: 0,
+    );
+  }
+
+  IconButton personIcon(BuildContext context) {
+    return IconButton(
+      icon: CircleAvatar(
+        backgroundColor: Colors.indigo[200],
+        child: const Icon(
+          Icons.person,
+          color: Colors.white,
+        ),
+      ),
+      // open left drawer after click on profile icon
+      onPressed: () => Scaffold.of(context).openDrawer(),
+    );
+  }
+
+  IconButton globeIcon(BuildContext context) {
+    return IconButton(
+      icon: const Icon(Icons.public),
+      onPressed: () {
+        // Handle action (e.g., open a map)
+        showErrDialog(context, 'Map view is under development.',
+            title: "Please hang on tight!");
+      },
     );
   }
 
