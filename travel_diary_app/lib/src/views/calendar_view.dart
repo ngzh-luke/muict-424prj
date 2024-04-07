@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:travel_diary_app/src/helpers/cloud_helpers/post_object.dart'
     as p;
@@ -57,14 +56,22 @@ class _CalendarViewState extends State<CalendarView> {
                 // print('format: $format');
               },
             ),
-            const Gap(5),
+            const Gap(1),
             Text(
                 style: TextStyle(
                     color: Colors.amber[700],
                     decoration: TextDecoration.underline),
                 "Selected date: ${DateFormat(DateFormat.YEAR_MONTH_DAY).format(focusedDate)}"),
-            const Gap(4),
+            const Gap(2),
             desList(),
+            const Spacer(),
+            ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    focusedDate = DateTime.now();
+                  });
+                },
+                child: const Text("Reset to TODAY")),
             const Spacer()
           ],
         ),
@@ -75,7 +82,7 @@ class _CalendarViewState extends State<CalendarView> {
   Padding desList() {
     return Padding(
       padding:
-          const EdgeInsets.only(top: 8.0, bottom: 5.0, left: 10, right: 10),
+          const EdgeInsets.only(top: 8.0, bottom: 3.0, left: 10, right: 10),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20.0),
@@ -93,7 +100,7 @@ class _CalendarViewState extends State<CalendarView> {
             Padding(
               padding: const EdgeInsets.all(12.0),
               child: SizedBox(
-                height: 220,
+                height: 150,
                 child: FutureBuilder<Widget>(
                   future: stream(),
                   builder:
@@ -152,7 +159,7 @@ class _CalendarViewState extends State<CalendarView> {
       }
 
       return SizedBox(
-        height: 100, // Set a fixed height
+        height: 70, // Set a fixed height
         child: ListView.builder(
           scrollDirection: Axis.vertical,
           itemCount: diaries.length,
@@ -161,7 +168,7 @@ class _CalendarViewState extends State<CalendarView> {
             return Padding(
               padding: const EdgeInsets.all(4.0),
               child: Container(
-                height: 100,
+                height: 50,
                 width: 200, // Set a fixed width for each item
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(25.0),
