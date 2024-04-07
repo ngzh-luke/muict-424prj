@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:travel_diary_app/src/diaries/all_diaries.dart';
 import 'package:travel_diary_app/src/diaries/my_diaries.dart';
 import 'package:travel_diary_app/src/diaries/add_destination.dart';
-import 'package:travel_diary_app/src/views/calenda_view.dart';
+import 'package:travel_diary_app/src/views/calendar_view.dart';
 import 'package:travel_diary_app/src/helpers/cloud_helpers/user_object.dart';
 import 'package:gap/gap.dart';
 
@@ -47,7 +47,7 @@ class HomeView extends StatelessWidget {
             // Handle calendar tap
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const CalendarView()),
+              MaterialPageRoute(builder: (context) => CalendarView()),
             );
           }
         },
